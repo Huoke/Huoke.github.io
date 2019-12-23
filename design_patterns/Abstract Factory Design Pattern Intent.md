@@ -77,12 +77,16 @@ class Rectangle : public Shape {
     }
 };
 
+// 抽象工厂
 class Factory {
   public:
+    // 抽象工厂方法 创建曲线
     virtual Shape* createCurvedInstance() = 0;
+    // 创建直线
     virtual Shape* createStraightInstance() = 0;
 };
 
+// 简单形状工厂
 class SimpleShapeFactory : public Factory {
   public:
     Shape* createCurvedInstance() {
@@ -92,6 +96,8 @@ class SimpleShapeFactory : public Factory {
       return new Square;
     }
 };
+
+// 固定形状工厂
 class RobustShapeFactory : public Factory {
   public:
     Shape* createCurvedInstance()   {
