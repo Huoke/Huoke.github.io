@@ -11,3 +11,8 @@ systemd支持Sys V和LSB(全称为 Linux 标准基础核心规范) init脚本，
 ## 二、systemctl 的基本用法
 主命令时systemctl，它是反省和控制systemd的主命令。它的一些用途是检查系统状态(system
  state)和管理系统和服务(managing the system and services)。有关更多详细信息，请参阅[systemctl](https://jlk.fjfi.cvut.cz/arch/manpages/man/systemctl.1)。
+ 
+ >**提示**：
+ - 下面的所有systemctl命令与 -H user@host 开关一起用于控制远程计算机上的一个systemd实例。将使用SSH连接到远程systemd实例。
+ - Plasma用户可以安装systemd-kcmAUR作为systemctl的图形前端。安装后，在系统管理(System administration)下会有该模块。
+ 
