@@ -41,8 +41,14 @@ systemctl list-unit-files
 ```shell
 systemctl status pid
 ```
-### 1.2 使用Units
-
+### 1.2 使用 Units
+单元可以是，例如，服务（.service）、装入点（.mount）、设备（.device）或套接字（.socket）。使用systemctl时，通常必须指定单元文件的完整名称，包括其后缀，例如sshd.socket。但是，在以下systemctl命令中指定单位时有一些简短的格式：
+- 如果不指定后缀，systemctl默认为是.service。例如，netctl和netctl.service是等价的。
+- 挂载点将自动转换为相应的挂载单元。例如，指定/home等同于home.mount。
+- 与挂载点类似，设备会自动转换为相应的.device单元，因此指定/dev/sda2等同于dev-sda2.device。
+参考[systemd.unit(5)的详细信息](https://jlk.fjfi.cvut.cz/arch/manpages/man/systemd.unit.5)
+> 注意：
+>
 ## 二、Writing unit files
 ## 三、Targets
 ## 四、Timers
