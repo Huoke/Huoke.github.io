@@ -134,3 +134,4 @@ type 非0，用于以非先进先出次序读取消息。例如，若应用程�
 msgrcv成功执行时，内核会更新与该消息队列相关的msgid_ds结构，以指示调用者的进程ID(msg_lrpid)和调用时间(msg_rtime)，并指示队列中的消息数减少了1个(msg_qnum)。
 
 -----
+[邹立巍](https://cloud.tencent.com/developer/article/1005533)
