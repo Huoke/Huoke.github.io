@@ -32,5 +32,22 @@
 
 - msgget用于创建一个新队列或者打开一个现有队列。
 - msgsend将消息添加到队列末尾。
-- msgrcv用于从队列中取得消息。
+- msgrcv用于从队列中取得消息, 并不一定要以先进先出次序去取消息，也可以按消息的类型字段去取消息。
 - msgctl对队列执行多种操作。
+
+每一个队列都有一个msqid_ds结构体与其关联：
+```c
+struct msqid_ds { 
+   struct ipc_perm msg_perm; // ipc 权限结构 
+   msgqnum_t msg_qnum; // 队列中的数据数 
+   msglen_t msg_qbytes; // 队列的最大字节容量 
+   pid_t msg_lspid; // 最近插入队列数据的进程 ID 
+   pid_t msg_lrpid; // 最近取出数据的进程 ID 
+   time_t msg_stime; // 最近入队时间 
+   time_t msg_rtime; // 最近出队时间 
+   time_t msg_ctime; // 最近更新时间 
+   ... 
+   ... 
+}  
+```
+该结构描述了队列的当前状态，各系统的具体实现会包含额外的字段。
