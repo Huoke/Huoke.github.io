@@ -60,6 +60,7 @@ struct msqid_ds {
 | 系统中最大消息队列数 | 40 | 16 | 不支持 | 50 |
 | 系统中最大消息数 | 40 | 导出的 | 不支持 | 40 |
 
+## msgget打开一个现有队列或创建一个新队列
 调用的第一个函数通常是msgget，其功能是打开一个现有队列或创建一个新队列
 ```c
 #include <sys/msg.h>
@@ -74,7 +75,7 @@ int msgget(key_t key, int flag)
 - msg_qbytes 设置为系统限制值。
 若执行成功，msgget返回非负值的队列ID。此后，该值就可被用于其他3个消息队列函数。
 
-msgctl函数对队列执行多种操作。 
+## msgctl函数对队列执行多种操作
 ```c
 #include <sys/msg.h>
 int msgctl(int msqid, int cmd, struct msqid_ds* buf);
@@ -82,15 +83,31 @@ int msgctl(int msqid, int cmd, struct msqid_ds* buf);
 它和另外两个与信号量及共享存储有关的函数(semctl和shmctl)都是XSI IPC的类似于ioctl的函数(即垃圾桶函数)，这里是后话，还没有学习到信号量和共享存储有关的函数。
 
 
-调用msgsnd将数据放到消息队列中。
+## 调用msgsnd将数据放到消息队列中
 ```c
 #include <sys/msg.h>
 int msgsnd(int msqid, const void* ptr, size_t nbytes, int flag);
 返回值: 若成功，返回0；若出错，返回-1
 ```
+每个消息都由3部分组成：一个正的长整型类型的字段、一个非负的长度(nbytes)、以及实际数据字节数。
+消息总是放在队列尾端。
 
+- ptr参数：指向一个长整型(long int)，它包含了消息类型(正的整型); 其后紧接着的是消息数据(若nbytes是0，则无消息数据)。若发送的最长消息是512字节，则可定义下列结构体:
+```c
+struct mymesg{
+    long mtype; // 消息类型
+    char mtext[512]; // 消息的数据部分，长度和nbytes一样
+};
+```
+>**某些平台既支持32位环境，又支持64位环境。这影响到长整型和指针的大小**。
+>例如，在64位Sparc系统中(一种基于RSIC精简指令集设计的处理器，是Sun公司独立完成)，允许32位应用程序和64位应用程序同时存在。如果一个32位应用程序要经过管道或者套接字和一个64位应用程序交换此结构，就会出问题。因为在32位应用程序中，长整型的大小是4字节，而在64位应用程序中，长整型的大小是8字节。这里就出现了一个有趣的问题：32位应用程序期望mtext字段在结构启始地址的第4个字节处开始，但是64位应用程序则期望mtext字段在结构启始地址后8字节处开始。在这种情况下，64位应用程序的mtype字段的一部分会被32位程序看做是mtext字段的组成部分；而32位程序的mtext字段的前4字节会被64位程序解释成为mtype字段的组成部分。
 
-msgrcv从队列中去取消息
+- flag参数：可以指定为IPC_NOWAIT。这类似于文件I/O中的非阻塞I/O标志；若消息队列已满(或者队列中的消息总数等于系统限制值，或队列中的字节总数等于系统限制值)，则指定IPC_NOWAIT使得msgsnd立即出错返回EAGAIN。
+如果没有指定IPC_NOWAIT，则进程会一直阻塞到：
+   1. 有空间可以容纳要发送的消息
+   2. 者从系统中删除了此队列，这种情况下返回EIDRM错误，表示标识符被删除。
+   3. 捕捉到一个信号，并从信号处理函数程序返回，这种情况下返回EINTR错误。
+## msgrcv从队列中去取消息
 ```c
 #include <sys/types.h>
 #include <sys/ipc.h>
