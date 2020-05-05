@@ -59,3 +59,42 @@ struct msqid_ds {
 | 一个特定队列的最大字节数(亦即队列中所有消息长度之和) | 2048 | 16384 | 不支持 | 4096 |
 | 系统中最大消息队列数 | 40 | 16 | 不支持 | 50 |
 | 系统中最大消息数 | 40 | 导出的 | 不支持 | 40 |
+
+调用的第一个函数通常是msgget，其功能是打开一个现有队列或创建一个新队列
+```c
+#include <sys/msg.h>
+int msgget(key_t key, int flag)
+返回值:若成功，返回消息队列ID， 若出错， 返回-1
+```
+15.6.1节中说明了将key变换成一个标识符的规则(**不怎么理解**)，并且讨论了是创建一个新队列还是引用一个现有队列。
+在创建新队列时，要初始化msqid_ds结构的下列成员。
+- ipc_perm结构按15.6.2节中所述进行初始化。该结构中的mode成员按flag中的相应权限位设置。这些权限用15-24中的值指定。
+- msg_qnum、msg_lspid、msg_lrpid、msg_stime 和 msg_rtime都设置为0。
+- msg_ctime设置为当前时间。
+- msg_qbytes 设置为系统限制值。
+若执行成功，msgget返回非负值的队列ID。此后，该值就可被用于其他3个消息队列函数。
+
+msgctl函数对队列执行多种操作。 
+```c
+#include <sys/msg.h>
+int msgctl(int msqid, int cmd, struct msqid_ds* buf);
+```
+它和另外两个与信号量及共享存储有关的函数(semctl和shmctl)都是XSI IPC的类似于ioctl的函数(即垃圾桶函数)，这里是后话，还没有学习到信号量和共享存储有关的函数。
+
+
+调用msgsnd将数据放到消息队列中。
+```c
+#include <sys/msg.h>
+int msgsnd(int msqid, const void* ptr, size_t nbytes, int flag);
+返回值: 若成功，返回0；若出错，返回-1
+```
+
+
+msgrcv从队列中去取消息
+```c
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+ssize_t msgrcv(int msqid, void *msgp, size_t msgsz, long msgtyp, int msgflg);
+返回值：成功返回消息数据部分的长度；若出错，返回-1
+```
