@@ -1,1 +1,13 @@
-# TCP Keepalive HOWTO
+# 1、介绍
+## 1.1、版权和许可
+## 1.2、免责声明
+## 1.3、学分/贡献者
+## 1.4、反馈
+## 1.5、翻译
+# 2、TCP Keepalive HOWTO
+keep TCP alive。这意味着您将能够检查已连接的套接字（也称为TCP套接字），并确定连接是否仍在运行或是否已断开。
+## 2.1、什么是TCP keepalive？
+keepalive概念很简单:当我们建立一个CTP连接时，会在内核中关联一组计时器。其中一些计时器就会专门来处理keepalive。当keepalive定时器到0时，会向对端发送一个keepalive包ACK便签打卡但是没有数据。
+## 2.2、为什么使用TCP keepalive？
+## 2.3、检查死对等点
+## 2.4、防止由于网络不活动而断开连接
