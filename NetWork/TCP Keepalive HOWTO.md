@@ -125,8 +125,8 @@ Linux内置了对keepalive的支持。您需要启用TCP/IP网络才能使用它
 - tcp_keepalive_probes
   在连接失效并通知应用层之前，要发送的未确认探测包数量。
 
-*记住：*Linux默认是不支持keepalive的，即使内核中有配置。程序必须使用setsockopt接口为其套接字获取keepalive控件。
-实现keepalive的程序相对较少，但是您可以按照本文档后面的说明轻松地为大多数程序添加keepalive的支持(控件)。
+*记住：Linux默认是不支持keepalive的，即使内核中有配置。程序必须使用setsockopt接口为其套接字获取keepalive控件。
+实现keepalive的程序相对较少，但是您可以按照本文档后面的说明轻松地为大多数程序添加keepalive的支持(控件)。*
 ## 3.1、配置内核参数
 有两种方法可以通过用户层命令在内核中配置keepalive参数：
 - procfs接口
@@ -157,8 +157,110 @@ Linux内置了对keepalive的支持。您需要启用TCP/IP网络才能使用它
 ```
 要确保这些修改都有效，还是重新检查一下文件，确认这些新值取代了旧值。
 
-*记住：*
+*记住：procfs处理特殊文件，不能对它们执行任何操作，因为它们只是内核空间中的一个接口，而不是真正的文件，所以在使用它们之前，请尝试使用脚本，并尝试使用简单的访问方法，如前所示。*
+
+可以通过sysctl（8）工具访问接口，指定要读或写的内容：
+```shell
+  # sysctl \
+  > net.ipv4.tcp_keepalive_time \
+  > net.ipv4.tcp_keepalive_intvl \
+  > net.ipv4.tcp_keepalive_probes
+  net.ipv4.tcp_keepalive_time = 7200
+  net.ipv4.tcp_keepalive_intvl = 75
+  net.ipv4.tcp_keepalive_probes = 9
+```
+注意：sysctl names 和 procfs paths非常相似，使用sysctl（8）的-w开关执行写操作：
+```shell
+  # sysctl -w \
+  > net.ipv4.tcp_keepalive_time=600 \
+  > net.ipv4.tcp_keepalive_intvl=60 \
+  > net.ipv4.tcp_keepalive_probes=20
+  net.ipv4.tcp_keepalive_time = 600
+  net.ipv4.tcp_keepalive_intvl = 60
+  net.ipv4.tcp_keepalive_probes = 20
+```
+注意：使用的是sysctl(8)而不是sysctl(2)系统调用。因为读写都直接在procfs子树中读写，所以您需要在内核中启用procfs并将其安装到文件系统中，就像直接访问procfs接口中的文件一样。Sysctl（8）只是做同样事情的另一种方法。
 ### 3.1.2、sysctl接口
 ## 3.2、重启来持久化设置
+有几种方法可以在每次启动时重新配置系统。首先，每一个Linux 发行版都有自己的init脚本集被称为init(8)。最常见的配置包括/etc/rc.d/目录，或者/etc/init.d目录。在任何情况下你都可以在任何启动脚本中设置参数，因为每次程序需要时都会重读keepalive配置参数。因此，如果在连接任处于启动状态时修改tcp_keepalive_intvl的值，内核将使用最新设置的值。
+
+逻辑上放置初始化命令位置有三个地方：
+- 首先是网络的配置。
+- 第二个是rc.local脚本，通常包含在所有发型版中，它被称为用户配置设置完成的地方。
+- 第三个位置可能已经存在于您的系统中。回到sysctl（8）工具，您可以看到-p开关从/etc/sysctl.conf配置文件加载设置。在许多情况下，In it脚本已经执行了sysctl-p（您可以在配置目录中“grep”它以进行确认），因此您只需在/etc/sysctl.conf中添加行即可在每次启动时加载它们。有关sysctl.conf（5）语法的更多信息，请参阅手册页。
 # 4、程序实例
+本节讨论如何通过编程来创建使用keepalive的应用程序。它要求你有C编程和网络概念方面的知识。首先你得熟悉sockets，并且有与应用程序相关方面的了解。
+## 4.1、当你的代码需要keepalive支持时
+并非所有的网络应用程序都需要keepalive支持。请记住，它是TCP keepalive支持。所以，正如您所想象的，只有TCP套接字可以利用它。在编写应用程序时，您可以做的最漂亮的事情是使它尽可能可定制，而不是强制决定。
+
+如果考虑到用户体验，应该实现keepalive，让用户通过命令行或者配置文件的方式来决定打开或者关闭使用这个功能。
+## 4.2、setsockopt功能调用
+要给特定的套接字启用keepalive，只需要在套接字本身上设置特定的套接字选项。函数原型如下:
+```c
+  int setsockopt(int s, int level, int optname,
+                 const void *optval, socklen_t optlen)
+```
+第一个参数是socket，以前是用socket（2）创建的；第二个参数必须是SOL_socket，第三个参数必须是SO_KEEPALIVE。第四个参数必须是布尔整数值，表示要启用该选项，而最后一个参数是之前传递的值的大小。
+
+根据手册，成功时返回0，错误时返回-1（并设置errno）。
+
+在写程序时，有三个socket选项可以给keepalive设置。它们都使用SOL_TCP级别代替SOL_SOCKET级别，并且它们只覆盖当前套接字的系统范围变量。
+- TCP_KEEPCNT: overrides tcp_keepalive_probes
+- TCP_KEEPIDLE: overrides tcp_keepalive_time
+- TCP_KEEPINTVL: overrides tcp_keepalive_intvl
+## 4.3、代码案例
+这是一个创建套接字的小示例，显示keepalive被禁用，然后启用它并检查该选项是否有效设置。
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+
+int main(void);
+
+int main()
+{
+   int s;
+   int optval;
+   socklen_t optlen = sizeof(optval);
+
+   /* Create the socket */
+   if((s = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) {
+      perror("socket()");
+      exit(EXIT_FAILURE);
+   }
+
+   /* Check the status for the keepalive option */
+   if(getsockopt(s, SOL_SOCKET, SO_KEEPALIVE, &optval, &optlen) < 0) {
+      perror("getsockopt()");
+      close(s);
+      exit(EXIT_FAILURE);
+   }
+   printf("SO_KEEPALIVE is %s\n", (optval ? "ON" : "OFF"));
+
+   /* Set the option active */
+   optval = 1;
+   optlen = sizeof(optval);
+   if(setsockopt(s, SOL_SOCKET, SO_KEEPALIVE, &optval, optlen) < 0) {
+      perror("setsockopt()");
+      close(s);
+      exit(EXIT_FAILURE);
+   }
+   printf("SO_KEEPALIVE set on socket\n");
+
+   /* Check the status again */
+   if(getsockopt(s, SOL_SOCKET, SO_KEEPALIVE, &optval, &optlen) < 0) {
+      perror("getsockopt()");
+      close(s);
+      exit(EXIT_FAILURE);
+   }
+   printf("SO_KEEPALIVE is %s\n", (optval ? "ON" : "OFF"));
+
+   close(s);
+
+   exit(EXIT_SUCCESS);
+}
+```
 # 5、增加对第三方软件的支持
