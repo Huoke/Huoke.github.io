@@ -116,8 +116,48 @@ keepalive的另一个目的是防止因为不活动而断开网络通道。 比�
 >1. 内核错误(Kernel panic)是指操作系统在监测到内部的致命错误，并无法安全处理此错误时采取的动作。这个概念主要被限定在Unix以及类Unix系统中；对>于MicrosoftWindows系统，等同的概念通常被称为蓝屏死机。
 
 # 3、在Linux下使用TCP的keepalive
+Linux内置了对keepalive的支持。您需要启用TCP/IP网络才能使用它。您还需要procfs支持和sysctl支持才能在运行时配置内核参数。
+涉及keepalive设置需要三个用户驱动变量：
+- tcp_keepalive_time
+  发送的最后一个数据包和首次发送keepalive探测包之间的时间间隔; 在连接被标记为需要keepalive之后不再使用这个计数器。
+- tcp_keepalive_intvl
+  keepalive探测包之间的时间间隔，在这期间不管连接发生什么改变。
+- tcp_keepalive_probes
+  在连接失效并通知应用层之前，要发送的未确认探测包数量。
+
+*记住：*Linux默认是不支持keepalive的，即使内核中有配置。程序必须使用setsockopt接口为其套接字获取keepalive控件。
+实现keepalive的程序相对较少，但是您可以按照本文档后面的说明轻松地为大多数程序添加keepalive的支持(控件)。
 ## 3.1、配置内核参数
+有两种方法可以通过用户层命令在内核中配置keepalive参数：
+- procfs接口
+- sysctl接口
+我们主要讨论如何在procfs接口上实现这一点，因为它是最常用、推荐和最容易理解的。sysctl接口，特别是关于sysctl（2）syscall而不是sysctl（8）工具的接口，仅用于背景知识。
 ### 3.1.1、procfs接口
+此接口需要同时在内核中安装sysctl和procfs，procfs需要安装/挂载到文件系统的某个位置(通常在/proc,如下案例所示)。您可以通过在/proc/sys/net/ipv4/目录中“catting”文件来读取实际参数的值：
+```shell
+  # cat /proc/sys/net/ipv4/tcp_keepalive_time
+  7200
+  
+  # cat /proc/sys/net/ipv4/tcp_keepalive_intvl
+  75
+
+  # cat /proc/sys/net/ipv4/tcp_keepalive_probes
+  9
+```
+前两个参数单位是秒，最后一个是纯数。这意味着keepalive程序在发送第一个keepalive探测之前需要等待两个小时（7200秒），然后每75秒重新发送一次。
+如果连续九次未收到ACK响应，则将连接标记为断开。
+
+修改这个值很简单：您需要在文件中写入新值。假设您决定配置主机，以便keepalive在通道不活动十分钟后启动，然后每隔一分钟发送探测。由于网络主干的高度不稳定性和间隔的低值，假设您还希望将探测数增加到20。下面就是我们修改的设置：
+```shell
+  # echo 600 > /proc/sys/net/ipv4/tcp_keepalive_time
+
+  # echo 60 > /proc/sys/net/ipv4/tcp_keepalive_intvl
+
+  # echo 20 > /proc/sys/net/ipv4/tcp_keepalive_probes
+```
+要确保这些修改都有效，还是重新检查一下文件，确认这些新值取代了旧值。
+
+*记住：*
 ### 3.1.2、sysctl接口
 ## 3.2、重启来持久化设置
 # 4、程序实例
