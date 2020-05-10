@@ -208,6 +208,8 @@ Linux内置了对keepalive的支持。您需要启用TCP/IP网络才能使用它
 - TCP_KEEPCNT: overrides tcp_keepalive_probes
 - TCP_KEEPIDLE: overrides tcp_keepalive_time
 - TCP_KEEPINTVL: overrides tcp_keepalive_intvl
+
+[这里有一个案例](http://blog.chinaunix.net/uid-15084954-id-190356.html)
 ## 4.3、代码案例
 这是一个创建套接字的小示例，显示keepalive被禁用，然后启用它并检查该选项是否有效设置。
 ```c
