@@ -33,3 +33,8 @@ TLS/SSL连接已关闭。如果协议版本是ssl3.0或更高版本，则仅当�
 读取数据。主要原因是因为TLS/SSL握手可能在协议期间的任何时候发生(由客户端或服务器启动); SSL_read()、SSL_peek()、和SSL_write()将处理任何挂起的握手。
 
 - SSL_ERROR_WANT_CONNECT, SSL_ERROR_WANT_ACCEPT
+- SSL_ERROR_SYSCALL
+发生了一些不可恢复的致命I/O错误。OpenSSL错误队列可能包含更多有关改错误的信息。对于Unix系统上的套接字，请参阅errno以获取详细信息。如果发生此错误，则不应该在连接上执行进一步的I/O操作，并且不得调用SSL_shutdown()。
+- SSL_ERROR_SSL
+SSL库中发生了不可恢复的致命错误，通常是协议错误。OpenSSL错误队列包含有关该错误的更多信息。如果发生此错误，则不应在连接上执行进一步的I/O操作，并且不得调用SSL_shutdown（）。
+
