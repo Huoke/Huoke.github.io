@@ -40,12 +40,25 @@ BOOL WriteFile(
   LPDWORD lpNumberOfBytesWritten, 
   LPOVERLAPPED lpOverlapped
 );
-
+```
 当我们调用这两个函数中的任何一个时，函数会检查hFile参数标识的设备是否是用FILE_FLAG_OVERLAPPED标志打开的。如果打开设备时指定了这个标志，那么函数会执行异步设备I/O。
 
 顺便说一下，当调用这两个函数来进行异步I/O的时候，我们通常给lpNumberOfBytesWritten或者lpNumberOfBytesRead赋予NULL，因为我们希望这两个函数在I/O请求完成之前就返回。
 
 因此这时就检查已经传输的字节数是没有意义的。争取充分利用CPU！！！！
+
+### 4.1 OVERLAPPED 结构
+
+在执行异步I/O的时候，我们必须在lpOverlapped参数中传入一个已经初始化的OVERLAPPED结构体。"overlapped"意思是指向I/O请求的时间与线程执行其他任务的时间是重叠的(overlapped)。下面是OVERLAPPED结构体：
+```C++
+# winbase.h
+typedef struct _OVERLAPPED {
+  ULONG_PTR Internal; 
+  ULONG_PTR InternalHigh; 
+  DWORD Offset; 
+  DWORD OffsetHigh; 
+  HANDLE hEvent; 
+} OVERLAPPED;
 ```
 
 ## 5 接收I/O请求完成通知
