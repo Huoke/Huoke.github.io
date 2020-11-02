@@ -1,6 +1,31 @@
 <h1 align = center>Configuring C/C++ debugging</h1>
 launch.json文件是用来给VS Code配置调试器的配置文件。
 # VS Code
+## 配置语言
+  - shift + ctrl + P，打开命令行。
+  - 在输入框中输入“Configure  Display Language”，点击打开locale.json。
+  - 编辑locale.json文件，如图所示。“locale”: "zh-CN"保存，然后重新打开编辑器即可。
+
+## 安装C/C++相关插件，包括以下插件
+1）C/C++
+2）C++ Intellisense
+3) Chinese(Simplified)中文简体 
+
+
+
+## 安装C++ 编译器
+进入http://tdm-gcc.tdragon.net/download，选第二个。 建议直接装在C盘，可以减少后面修改路径的麻烦。  安装的时候，需要手动勾选如下图所示的选项（gdb），否则下面5中launch.json"。
+```json
+"miDebuggerPath": "C:/TDM-GCC-64/bin/gdb64.exe"
+```
+
+## 配置编译环境
+
+参考官方做法，配置四个json文件
+```html
+https://code.visualstudio.com/docs/languages/cpp 
+```
+
 
 VS Code 生成一个launch.json文件将包含几乎所有所需的信息。 
 
