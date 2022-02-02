@@ -1,16 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>My New Hugo Site</title>
+        <title></title>
         <link>http://example.org/</link>
-        <description>My New Hugo Site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 09 Jan 2022 22:29:41 &#43;0800</lastBuildDate>
+        <description>这是我的长期储备</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 09 Jan 2022 22:29:41 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>First_post</title>
-    <link>http://example.org/posts/first_post/</link>
+    <title>File System</title>
+    <link>http://example.org/posts/my-post/first_post/</link>
     <pubDate>Sun, 09 Jan 2022 22:29:41 &#43;0800</pubDate><author>
-        <name>Author</name>
-    </author><guid>http://example.org/posts/first_post/</guid>
+        <name>作者</name>
+    </author><guid>http://example.org/posts/my-post/first_post/</guid>
     <description><![CDATA[散列表(哈希表)能够通过给定的关键字的值直接访问到具体对应的值的一个数据结构。也就是说把关键字映射到一个表中的位置来直接访问记录，以加快访问速度。
 通常我们把关键字称为Key，把对应的记录称为value，通过Key访问一个映射表来得到value的地址。这个映射表叫作散列函数或者哈希函数，存放记录的数组叫作散列表。
 其中有个情况，就是通过不同的Key，可能访问到同一个地址，这种现象叫作碰撞(Collision)。而通过某个Key一定会到唯一的Value地址。
