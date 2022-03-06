@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">文件系统 - Billow&#39;s Blog</title><meta name="Description" content="文件系统概念"><meta property="og:title" content="文件系统" />
+<meta property="og:description" content="文件系统概念" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/file_system/" /><meta property="og:image" content="http://example.org/images/DanceMouse.webp"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-03T21:40:32+08:00" />
+<meta property="article:modified_time" content="2022-03-06T21:40:32+08:00" /><meta property="og:site_name" content="这是我的长期储备" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/images/DanceMouse.webp"/>
+
+<meta name="twitter:title" content="文件系统"/>
+<meta name="twitter:description" content="文件系统概念"/>
+<meta name="application-name" content="DoIt">
+<meta name="apple-mobile-web-app-title" content="DoIt">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/file_system/" /><link rel="prev" href="http://example.org/theme-documentation-basics/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript>
+    
+    
+    
+    <meta name="google-site-verification" content="MQ8DNu27ayX6B_4ObiEDK09vGr1fdy7kOAnbd09hJk4" /><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "文件系统",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/file_system\/"
+        },"image": ["http:\/\/example.org\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  4701 ,
+        "url": "http:\/\/example.org\/file_system\/","datePublished": "2021-12-03T21:40:32+08:00","dateModified": "2022-03-06T21:40:32+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "http:\/\/example.org\/images\/avatar.webp",
+                    "width":  528 ,
+                    "height":  560 
+                }},"authors": [{
+                    "@type": "Person",
+                    "name": "Billow"
+                },{
+                    "@type": "Person",
+                    "name": "Billow"
+                }],"description": "文件系统概念"
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Billow&#39;s Blog"><span class="header-title-pre"><i class='far fa-edit fa-fw'></i></span>Billow&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/series/"> 系列 </a><a class="menu-item" href="/showcase/"> 作品 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/HEIGE-PCloud/DoIt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" title="Select Language" id="language-select-desktop" onchange="location = this.value;"><option value="/file_system/" selected>简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" onclick="return false;" class="menu-item theme-select" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                        <option value="black">黑色</option>
+                        <option value="auto">跟随系统</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Billow&#39;s Blog"><span class="header-title-pre"><i class='far fa-edit fa-fw'></i></span>Billow&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" onclick="return false;" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/series/" title="">系列</a><a class="menu-item" href="/showcase/" title="">作品</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/HEIGE-PCloud/DoIt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="#" onclick="return false;" class="menu-item theme-select" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="black">黑色</option>
+                    <option value="auto">跟随系统</option>
+                </select>
+            </a><a href="#" onclick="return false;" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" title="Select Language" onchange="location = this.value;"><option value="/file_system/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一文件系统的实现">一、文件系统的实现</a></li>
+    <li><a href="#11文件系统布局">1.1、文件系统布局</a></li>
+    <li><a href="#12文件的实现">1.2、文件的实现</a>
+      <ul>
+        <li><a href="#121连续分配">1.2.1、连续分配</a></li>
+        <li><a href="#122链表分配">1.2.2、链表分配</a></li>
+        <li><a href="#123采用内存中的表进行链表分配">1.2.3、采用内存中的表进行链表分配</a></li>
+        <li><a href="#124i节点">1.2.4、i节点</a></li>
+      </ul>
+    </li>
+    <li><a href="#二目录的实现">二、目录的实现</a></li>
+    <li><a href="#三共享文件">三、共享文件</a></li>
+    <li><a href="#authors-billow">authors: [Billow]</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">文件系统</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><i class="author fas fa-user-circle fa-fw"></i><span class='screen-reader-text'>  </span><a href='http://example.org/authors/billow'>Billow</a>, <a href='http://example.org/authors/billow'>Billow</a></span>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-12-03">2021-12-03</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2022-03-06">2022-03-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4701 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;<span id="/file_system/" class="leancloud_visitors" data-flag-title="文件系统">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count id=twikoo_visitors></span>&nbsp;次阅读
+                    </span>&nbsp;<span id="/file_system/" class="comment_count" data-flag-title="文件系统">
+                        <i class="far fa-comments fa-fw"></i>&nbsp;<span class="twikoo-comment-count" id="twikoo-comment-count"></span>&nbsp;条评论
+                    </span>&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一文件系统的实现">一、文件系统的实现</a></li>
+    <li><a href="#11文件系统布局">1.1、文件系统布局</a></li>
+    <li><a href="#12文件的实现">1.2、文件的实现</a>
+      <ul>
+        <li><a href="#121连续分配">1.2.1、连续分配</a></li>
+        <li><a href="#122链表分配">1.2.2、链表分配</a></li>
+        <li><a href="#123采用内存中的表进行链表分配">1.2.3、采用内存中的表进行链表分配</a></li>
+        <li><a href="#124i节点">1.2.4、i节点</a></li>
+      </ul>
+    </li>
+    <li><a href="#二目录的实现">二、目录的实现</a></li>
+    <li><a href="#三共享文件">三、共享文件</a></li>
+    <li><a href="#authors-billow">authors: [Billow]</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="散列表哈希表" class="headerLink">
+    <a href="#%e6%95%a3%e5%88%97%e8%a1%a8%e5%93%88%e5%b8%8c%e8%a1%a8" class="header-mark"></a>散列表(哈希表)</h1><p>能够通过给定的关键字的值直接访问到具体对应的值的一个数据结构。也就是说把关键字映射到一个表中的位置来直接访问记录，以加快访问速度。</p>
+<p>通常我们把关键字称为Key，把对应的记录称为value，通过Key访问一个映射表来得到value的地址。这个映射表叫作散列函数或者哈希函数，存放记录的数组叫作散列表。</p>
+<p>其中有个情况，就是通过不同的Key，可能访问到同一个地址，这种现象叫作碰撞(Collision)。而通过某个Key一定会到唯一的Value地址。</p>
+<h1 align="center">文件系统</h1>
+<h2 id="一文件系统的实现" class="headerLink">
+    <a href="#%e4%b8%80%e6%96%87%e4%bb%b6%e7%b3%bb%e7%bb%9f%e7%9a%84%e5%ae%9e%e7%8e%b0" class="header-mark"></a>一、文件系统的实现</h2><ul>
+<li>文件和目录是怎样存储。</li>
+<li>磁盘空间是怎么样管理。</li>
+<li>怎样使系统有效而可靠地工作。</li>
+</ul>
+<h2 id="11文件系统布局" class="headerLink">
+    <a href="#11%e6%96%87%e4%bb%b6%e7%b3%bb%e7%bb%9f%e5%b8%83%e5%b1%80" class="header-mark"></a>1.1、文件系统布局</h2><p>文件系统存放在磁盘上。多数磁盘会划分为一个或多个分区，每个分区中有一个独立的文件系统。磁盘的0号扇区称为<strong>主引导记录</strong>(Master Boot Record, MBR)。用来引导计算机。在MBR的结尾是分区表。该表给出每个分区的起始和结束地址。表中的一个分区被标记为活动分区。在计算机被引导时，BIOS读入并执行MBR。MBR做的第一件事情使确定活动分区，读入它的第一个块，称为<strong>引导块</strong>(boot block)，并执行之。引导块中的程序将装载该分区中的操作系统。为统一，每个分区都从一个引导块开始，即使它不包含一个可启动的操作系统。不过未来这个分区也许会有一个操作系统呢。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>linux BIOS开机自检简绍<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><h2 align="center">linux BIOS开机自检简绍</h2>
+前面提到，服务器通电后，会直接进入 BIOS，BIOS 全称 Basic Input/Output System，中文可译为基本输入/输出系统。简单地理解 BIOS，它就是固化在主板上一个 ROM（只读存储器）芯片上的程序，主要保存计算机的基本输入/输出信息、系统设置信息、开机自检程和系统自启动程序，用来为计算机提供最底层和最直接的硬件设置与控制。也就是说，BIOS 是硬件与软件之间的接口，而且是非常基本的接口，BIOS 提供了一组基本的操作系统使用的指令，系统启动的成功与否，依赖于 BIOS。
+<p>BIOS 的初始化主要完成以下 3 项工作：
+第一次检查计算机硬件和外围设备（第二次自检由内核完后，后续会讲），例如 CPU、内存、风扇灯。当 BIOS 一启动，就会做一个自我检测的工作，整个自检过程也被称为 POST（Power On Self Test）自检。</p>
+<p>如果自检没有问题，BIOS 开始对硬件进行初始化，并规定当前可启动设备的先后顺序，选择由那个设备来开机(通常是硬盘)。
+选择好开启设备后，就会从该设备的 MBR（主引导目录）中读取 Boot Loader（启动引导程序）并执行。启动引导程序用于引导操作系统启动，Linux 系统中默认使用的启动引导程序是 GRUB。</p>
+<p>当 MBR 被加载到 RAM 之后，BIOS 就会将控制权交给 MBR，进入系统引导的第二阶段。</p>
+</div>
+        </div>
+    </div>
+<p>除了引导块之外，磁盘分区的布局是随着文件系统的不同而变化的。文件系统经常包含有如图所示的一些项目:</p>
+<figure><a class="lightgallery" href="a_file_system.jpg" title="a_file_system.jpg" data-thumbnail="a_file_system.jpg" data-sub-html="<h2>基本配置下的预览</h2>">
+        <img
+            class="lazyload"
+            data-src="a_file_system.jpg"
+            data-srcset="a_file_system.jpg, a_file_system.jpg 1.5x, a_file_system.jpg 2x"
+            data-sizes="auto"
+            alt="a_file_system.jpg"height="1562"width="2450"
+        />
+    </a><figcaption class="image-caption">基本配置下的预览</figcaption>
+    </figure>
+<p><img
+        class="lazyload"
+        data-src="a_file_system.jpg"
+        data-srcset="a_file_system.jpg, a_file_system.jpg 1.5x, a_file_system.jpg 2x"
+        data-sizes="auto"
+        alt="a_file_system.jpg"
+        title="一个简单的文件系统"
+    /></p>
+<p>第一个是<strong>超级块（superblock）</strong>, 超级块包含文件系统的所有关键参数，在计算机启动时，或者在该文件系统首次使用时，超级块会被读入内存。超级块中典型信息包括：确定文件系统类型用的魔数，文件系统中块的数量以及其他重要的管理信息。</p>
+<p>接着是文件系统中空闲块的信息，例如，可以用位图或指针列表的形式给出。后面也许跟随的是一组i节点，这是一个数据结构数组，每个文件一个，i节点说明了文件的方方面面。接着可能是根目录，它存放文件系统目录树的根部。最后，磁盘的其他部分存放了其他所有的目录和文件。</p>
+<h2 id="12文件的实现" class="headerLink">
+    <a href="#12%e6%96%87%e4%bb%b6%e7%9a%84%e5%ae%9e%e7%8e%b0" class="header-mark"></a>1.2、文件的实现</h2><p>文件存储实现的 <u>关键问题是记录各个文件分别用到哪些磁盘块</u>。不同操作系统采用不同的方法。这一节我们讨论研究其中的一些方法。</p>
+<h3 id="121连续分配" class="headerLink">
+    <a href="#121%e8%bf%9e%e7%bb%ad%e5%88%86%e9%85%8d" class="header-mark"></a>1.2.1、连续分配</h3><p>最简单的分配方案是把每个文件作为一连串连续数据块存储在磁盘上。所以，在块大小为1KB的磁盘上，50KB的文件要分
+配50个连续的块。对于磁盘块大小为2KB的磁盘，将分配25个连续的块。</p>
+<p>在图4-10a中是一个连续分配的例子，这里列出了头40块，从左面0块开始。初始化状态下，磁盘是空的。接着，从磁盘开始处（块0）开始写入长度为4块的文件A。紧接着，在文件A的结尾开始写入一个3块的文件B。</p>
+<figure><a class="lightgallery" href="continuous_disk_allocation_scheme.jpg" title="continuous_disk_allocation_scheme.jpg" data-thumbnail="continuous_disk_allocation_scheme.jpg" data-sub-html="<h2>基本配置下的预览</h2>">
+        <img
+            class="lazyload"
+            data-src="continuous_disk_allocation_scheme.jpg"
+            data-srcset="continuous_disk_allocation_scheme.jpg, continuous_disk_allocation_scheme.jpg 1.5x, continuous_disk_allocation_scheme.jpg 2x"
+            data-sizes="auto"
+            alt="continuous_disk_allocation_scheme.jpg"height="1562"width="2450"
+        />
+    </a><figcaption class="image-caption">基本配置下的预览</figcaption>
+    </figure>
+<p><img
+        class="lazyload"
+        data-src="continuous_disk_allocation_scheme.jpg"
+        data-srcset="continuous_disk_allocation_scheme.jpg, continuous_disk_allocation_scheme.jpg 1.5x, continuous_disk_allocation_scheme.jpg 2x"
+        data-sizes="auto"
+        alt="continuous_disk_allocation_scheme.jpg"
+        title="连续磁盘分配方案"
+    /></p>
+<p>请注意，每个文件都从一个新的块开始，假如文件A实际上只有 3 $\frac{1}{2}$块空间，那么最后一块的结尾就实际上是浪费了一些空间。在图4-10中，一共列出了7个文件，每一个文件都从前面文件结尾的后续块开始。加阴影表示文件分割没有说明别的意思。</p>
+<p>连续磁盘空间分配方案存在两大优势：</p>
+<ul>
+<li>实现简单，记录每个文件用到的磁盘块简化为只需要记住两个数字即可：第一块的磁盘地址和文件的块数。给定了第一块的编号，一个简单的加法就可以找到任何其他块的编号。</li>
+<li>读操作性能较好，因为在单个操作中就可以从磁盘上读出整个文件。只需要一次寻找(对第一个块)。之后不再需要寻道和旋转延迟，所以，数据以磁盘全带的速率输入。可见连续分配实现简单且具有高的性能。</li>
+</ul>
+<p>连续磁盘空间分配方案明显缺陷：</p>
+<ul>
+<li>随着时间推移，磁盘会变得零碎。</li>
+</ul>
+<p>且看b)中，这里删除两个文件D和F。当删除一个文件时，它占用的块自然就释放了，在磁盘上留下一堆空闲块。磁盘不会在这个位置挤压掉这个空洞，因为这样会涉及复制空洞之后的所有文件，可能会有上百万的块。结果是，磁盘上最终既包含文件也有空洞。开始时，碎片并不是问题，因为每个新的文件都在先前文件的结尾部分之后的磁盘空间里写入。但是，磁盘最终会被充满，所以要么压缩磁盘，要么重新使用空洞所在的空闲空间。前者由于代价太高而不可行；后者需要维护一个空洞列表，这是可行的。但是，当创建一个新的文件时，为了挑选合适大小的空洞存入文件，就有必要知道该文件的最终大小。</p>
+<h3 id="122链表分配" class="headerLink">
+    <a href="#122%e9%93%be%e8%a1%a8%e5%88%86%e9%85%8d" class="header-mark"></a>1.2.2、链表分配</h3><p>存储文件的第二种方案是为每个文件构造磁盘块链表。如图4-11所示。每个块的第一个字作为指向下一块的指针，块的其他部分存放数据。
+与连续分配方案不同，这一方法可以充分利用每个磁盘块。不会因为磁盘碎片而浪费存储空间(除了最后一块中的内部碎片)。同样在目录项中，只需要存放第一块的磁盘地址，文件的其它快就可以从这个首块地址查找到。说什么目录项？？？？？</p>
+<p>另一方面，在链表分配方案中，尽管顺序读文件非常方便，但是随机访问却相当缓慢。要获得块n，操作系统每一次都必须从头开始，并且要先读前面的n-1块，这就太慢了。</p>
+<p>而且，由于指针占去了一些字节，每个磁盘块存储数据的字节数不再是2的整数次幂。虽然这个问题并不是非常严重，但是怪异的大小确实降低了系统的运行效率，因为许多程序都是以长度为2的整数次幂来读写磁盘块的。由于每个块的前几个字节被指向下一个块的指针所占据，所以要读出完整的一个块大小的信息，就需要从两个磁盘块中获得并拼接信息，这就会导致复制引发额外的开销。</p>
+<figure><a class="lightgallery" href="list-calloc.jpg" title="list-calloc.jpg" data-thumbnail="list-calloc.jpg" data-sub-html="<h2>基本配置下的预览</h2>">
+        <img
+            class="lazyload"
+            data-src="list-calloc.jpg"
+            data-srcset="list-calloc.jpg, list-calloc.jpg 1.5x, list-calloc.jpg 2x"
+            data-sizes="auto"
+            alt="list-calloc.jpg"height="1562"width="2450"
+        />
+    </a><figcaption class="image-caption">基本配置下的预览</figcaption>
+    </figure>
+<p><img
+        class="lazyload"
+        data-src="list-calloc.jpg"
+        data-srcset="list-calloc.jpg, list-calloc.jpg 1.5x, list-calloc.jpg 2x"
+        data-sizes="auto"
+        alt="list-calloc.jpg"
+        title="list-calloc.jpg"
+    /></p>
+<h3 id="123采用内存中的表进行链表分配" class="headerLink">
+    <a href="#123%e9%87%87%e7%94%a8%e5%86%85%e5%ad%98%e4%b8%ad%e7%9a%84%e8%a1%a8%e8%bf%9b%e8%a1%8c%e9%93%be%e8%a1%a8%e5%88%86%e9%85%8d" class="header-mark"></a>1.2.3、采用内存中的表进行链表分配</h3><p>取出每个磁盘块的指针字，把它们放在内存的一个表中，就可以解决上述链表的两个不足。图4-12表示了图4-11所示例子的内存中表的内容。这两个图中都有两个文件，文件A依次使用了磁盘块4、7、2、10和12，文件B依次使用了磁盘块6、3、11和14。利用图4-12中的表，可以从第4块开始，顺着链表走到最后，找到文件A的全部磁盘块。同样，从第6块开始，顺这链表走到最后，也能够找出文件B的全部磁盘块。这两个链都是以一个不属于有效磁盘编号的特殊标记(如-1)结束。内存中这样一个表格称为<strong>文件分配表(File Allocation Table, FAT)</strong>。</p>
+<p>按这类方式组织，整个块都可以存放数据。虽然仍要顺着链在文件中查找给定的偏移量，但是整个链都存在于内存中，所以不需要任何磁盘空间引用，这样随机访问相比之前要好很多。与前面的方法相同，不管文件有多大，在目录项中只需要记录一个整数(起始块号)，按照它就可以找到文件的全部块。</p>
+<p>这种方法的主要缺点是必须把整个表都存放在内存中。对于1TB的磁盘和1KB大小的块，这张表需要有10亿项，每一项对应一块磁盘块。每项至少三个字节，为了提高查找速度，有时需要4个字节。根据系统对空间或时间的优化方案，这张表要占用3GB或者2.4GB内存。显然FAT的管理方式不能较好地扩展并应用于大型磁盘中。而正是最初的MS-DOS文件系统比较实用，因此windows现在都支持它。</p>
+<h3 id="124i节点" class="headerLink">
+    <a href="#124i%e8%8a%82%e7%82%b9" class="header-mark"></a>1.2.4、i节点</h3><p>最后一个记录各个文件分别包含哪些磁盘块的方法是给每个文件赋予一个称为i节点(index-node)的数据结构，这个数据结构中记录了文件属性和文件块的磁盘地址。图14-3是一个简单描述。给定i节点，就能找到文件的所有块。我们看看它和FAT相比的优势是，即只有在对应的文件打开时，其i节点才在内存中。如果每个i节点占用n个字节，最多k个文件同时打开，那么为了打开文件而保留i节点的数组所占的全部内存仅仅时kn个字节，只需要提前保留这么多空间即可。</p>
+<figure><a class="lightgallery" href="i-node.jpg" title="i-node.jpg" data-thumbnail="i-node.jpg" data-sub-html="<h2>i节点例子</h2>">
+        <img
+            class="lazyload"
+            data-src="i-node.jpg"
+            data-srcset="i-node.jpg, i-node.jpg 1.5x, i-node.jpg 2x"
+            data-sizes="auto"
+            alt="i-node.jpg"height="1562"width="2450"
+        />
+    </a><figcaption class="image-caption">i节点例子</figcaption>
+    </figure>
+<p><img
+        class="lazyload"
+        data-src="i-node.jpg"
+        data-srcset="i-node.jpg, i-node.jpg 1.5x, i-node.jpg 2x"
+        data-sizes="auto"
+        alt="i-node.jpg"
+        title="i-node.jpg"
+    /></p>
+<p>这个数组通常比文件分配表(FAT)所占据的空间要小。原因就是FAT保留所有磁盘块的链表的大小是与磁盘空间的大小成正比的，磁盘若有n块，文件分配表就需要有n项，磁盘变得越大，文件分配表也将线性增加。相反，i节点机制需要在内存中有一组数组，其大小是和同时打开文件得数量成线性正比的，而与磁盘大小无关。</p>
+<p>i节点也有一个问题，如果每一个i节点只能存储固定数量的磁盘地址，那么当一个文件所含的磁盘块超出i节点所能容纳的数目怎么办？</p>
+<p>一个解决方案是最后一个“磁盘地址”不指向数据块，而是指向一个包含额外磁盘块地址的块的地址(号拗口)。更高级的解决方案是：可以有两个或更多个包含磁盘地址的块，或指向其他存放地址的磁盘块的磁盘块。Unix和Windows NTFS文件系统采用了相似的方案。</p>
+<h2 id="二目录的实现" class="headerLink">
+    <a href="#%e4%ba%8c%e7%9b%ae%e5%bd%95%e7%9a%84%e5%ae%9e%e7%8e%b0" class="header-mark"></a>二、目录的实现</h2><p>读文件前，必须打开文件。打开文件时，操作系统利用用户给出的路径名找到相应的目录项。目录项中提供查找文件磁盘块所需要的信息。？</p>
+<blockquote>
+<p>问操作系统利用用户给出的路径名找到相应的目录项，用户调用fopen系统API，传入文件路径，操作系统中文件系统/目录系统再找到目录项，而后目录项中存放要访问文件属性。</p>
+</blockquote>
+<p>不同系统，这些信息可能是整个文件的磁盘地址(对于连续分配方案)、第一个块的编号(对于两种链表分配方案)或者是i节点号。无论怎么样，目录系统的主要功能是把ASCII文件名映射成定位文件数据所需的信息。</p>
+<p>与此密切相关的问题是如何存放文件属性。每个文件系统维护文件所有者、创建时间等文件属性，它们必须存储在某个地方。一种显而易见的方法是把文件属性直接存放在目录项中。很多系统确实是这样实现的。如图4-14a所示：</p>
+<figure><a class="lightgallery" href="%e5%9b%be4-14.jpg" title="图4-14.jpg" data-thumbnail="图4-14.jpg" data-sub-html="<h2>图4-14a</h2>">
+        <img
+            class="lazyload"
+            data-src="%e5%9b%be4-14.jpg"
+            data-srcset="%e5%9b%be4-14.jpg, %e5%9b%be4-14.jpg 1.5x, %e5%9b%be4-14.jpg 2x"
+            data-sizes="auto"
+            alt="图4-14.jpg"height="1562"width="2450"
+        />
+    </a><figcaption class="image-caption">图4-14a</figcaption>
+    </figure>
+<p><img
+        class="lazyload"
+        data-src="%e5%9b%be4-14.jpg"
+        data-srcset="%e5%9b%be4-14.jpg, %e5%9b%be4-14.jpg 1.5x, %e5%9b%be4-14.jpg 2x"
+        data-sizes="auto"
+        alt="图4-14.jpg"
+        title="图4-14.jpg"
+    /></p>
+<p>在这个简单设计中，目录中有一个固定大小的目录项列表，每个文件对应一项，其中包含一个(固定长度)文件名、文件属性的结构体和用以说明磁盘块位置的一个或多个磁盘地址(至某个最大值)。</p>
+<p>采用i节点的系统，还存在另一种方法，即把文件属性存放在i节点中而不是目录项中。在这种情形下，目录项会更短：只有文件名和i节点号。如图4-14b所示：</p>
+<figure><a class="lightgallery" href="%e5%9b%be4-14b.jpg" title="图4-14b.jpg" data-thumbnail="图4-14b.jpg" data-sub-html="<h2>图4-14b</h2>">
+        <img
+            class="lazyload"
+            data-src="%e5%9b%be4-14b.jpg"
+            data-srcset="%e5%9b%be4-14b.jpg, %e5%9b%be4-14b.jpg 1.5x, %e5%9b%be4-14b.jpg 2x"
+            data-sizes="auto"
+            alt="图4-14b.jpg"height="1562"width="2450"
+        />
+    </a><figcaption class="image-caption">图4-14b</figcaption>
+    </figure>
+<p><img
+        class="lazyload"
+        data-src="%e5%9b%be4-14b.jpg"
+        data-srcset="%e5%9b%be4-14b.jpg, %e5%9b%be4-14b.jpg 1.5x, %e5%9b%be4-14b.jpg 2x"
+        data-sizes="auto"
+        alt="图4-14b.jpg"
+        title="图4-14b.jpg"
+    /></p>
+<h2 id="三共享文件" class="headerLink">
+    <a href="#%e4%b8%89%e5%85%b1%e4%ba%ab%e6%96%87%e4%bb%b6" class="header-mark"></a>三、共享文件</h2><p>当几个用户同在一个项目里工作时，他们常常需要共享文件。其结果是，如果一个共享文件同时出现在属于不同用户的不同目录下，工作起来就很方便。
+如果一个共享文件同时出现在属于不同用户的不同目录下，工作起来就很方便。如下图所示：</p>
+<figure><a class="lightgallery" href="%e5%85%b1%e4%ba%ab%e6%96%87%e4%bb%b6.jpg" title="共享文件.jpg" data-thumbnail="共享文件.jpg" data-sub-html="<h2>共享文件</h2>">
+        <img
+            class="lazyload"
+            data-src="%e5%85%b1%e4%ba%ab%e6%96%87%e4%bb%b6.jpg"
+            data-srcset="%e5%85%b1%e4%ba%ab%e6%96%87%e4%bb%b6.jpg, %e5%85%b1%e4%ba%ab%e6%96%87%e4%bb%b6.jpg 1.5x, %e5%85%b1%e4%ba%ab%e6%96%87%e4%bb%b6.jpg 2x"
+            data-sizes="auto"
+            alt="共享文件.jpg"height="1562"width="2450"
+        />
+    </a><figcaption class="image-caption">共享文件</figcaption>
+    </figure>
+<p><img
+        class="lazyload"
+        data-src="%e5%85%b1%e4%ba%ab%e6%96%87%e4%bb%b6.jpg"
+        data-srcset="%e5%85%b1%e4%ba%ab%e6%96%87%e4%bb%b6.jpg, %e5%85%b1%e4%ba%ab%e6%96%87%e4%bb%b6.jpg 1.5x, %e5%85%b1%e4%ba%ab%e6%96%87%e4%bb%b6.jpg 2x"
+        data-sizes="auto"
+        alt="共享文件.jpg"
+        title="共享文件.jpg"
+    /></p>
+<ul>
+<li>B 的目录与该共享文件的联系称为一个 <strong>链接</strong>(link)。</li>
+<li>文件系统本身是一个有向无环图(DAG)而不是一棵树。</li>
+</ul>
+<p>将文件系统组织成有向无环图使得维护变的复杂，必须付出一定的代价。</p>
+<p>共享文件是方便的，但也带来一些问题：</p>
+<hr>
+<h2 id="authors-billow" class="headerLink">
+    <a href="#authors-billow" class="header-mark"></a>authors: [Billow]</h2></div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-03-06</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/file_system/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                    </span><span>|&nbsp;<a class="link-to-source" href=https://github.com/HEIGE-PCloud/DoIt/blob/main/exampleSite/content/posts\file-system\File_System.md target="_blank" rel="noopener noreferrer">查看源代码</a>
+                    </span><span>|&nbsp;<a class="link-to-edit" href=https://github.com/HEIGE-PCloud/DoIt/edit/main/exampleSite/content/posts\file-system\File_System.md target="_blank" rel="noopener noreferrer">编辑此页</a>
+                    </span><span>|&nbsp;<a class="link-to-report" href=https://github.com/HEIGE-PCloud/DoIt/issues/new?title=[bug]%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F&body=|Field|Value|%0A|-|-|%0A|Title|%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F|%0A|Url|http://example.org/file_system/|%0A|Filename|https://github.com/HEIGE-PCloud/DoIt/blob/main/exampleSite/content/posts\file-system\File_System.md| target="_blank" rel="noopener noreferrer">报告问题</a>
+                    </span></div>
+            <div class="post-info-share">
+                <span><a href="#" onclick="return false;" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/file_system/" data-title="文件系统"><i class="fab fa-twitter fa-fw"></i></a><a href="#" onclick="return false;" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/file_system/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="#" onclick="return false;" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://example.org/file_system/" data-title="文件系统"><i class="fab fa-hacker-news fa-fw"></i></a><a href="#" onclick="return false;" title="分享到 Line" data-sharer="line" data-url="http://example.org/file_system/" data-title="文件系统"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="#" onclick="return false;" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/file_system/" data-title="文件系统"><i class="fab fa-weibo fa-fw"></i></a><a href="#" onclick="return false;" title="分享到 Telegram" data-sharer="telegram" data-url="http://example.org/file_system/" data-title="文件系统" data-web><i class="fab fa-telegram-plane fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/theme-documentation-basics/" class="prev" rel="prev" title="主题文档 - 基本概念"><i class="fas fa-angle-left fa-fw"></i>主题文档 - 基本概念</a></div>
+</div>
+<div id="comments"><div id="twikoo"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://twikoo.js.org/">Twikoo</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> 强力驱动&nbsp;|&nbsp;主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">Billow</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div><script>
+                    if('serviceWorker' in navigator) {
+                        navigator.serviceWorker
+                            .register('/sw.min.js', { scope: '/' })
+                            .then(function(registration) {
+                            });
+                
+                        navigator.serviceWorker
+                            .ready
+                            .then(function(registration) {
+                            });
+                    }
+                </script></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></div>
+
+<div class="pjax-assets"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"twikoo":{"commentCount":true,"el":"#twikoo","envId":"https://doit-docs-comment-twikoo.vercel.app/","lang":"zh-cn"}},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"algoliaAppID":"5YGRNRQK1G","algoliaIndex":"zh_cn_index","algoliaSearchKey":"0ff6874805de24b84aa1d5ebccad56cd","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"},"sharerjs":true,"table":{"sort":true}};</script><script type="text/javascript" src="/lib/twikoo/twikoo.all.min.js" defer></script><script type="text/javascript" src="/js/twikoo.min.js" defer></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"></div>
+</body>
+
+</html>
