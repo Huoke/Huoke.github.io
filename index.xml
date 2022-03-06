@@ -1,84 +1,84 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Billow&#39;s Blog</title>
-        <link>https://hugodoit.pages.dev/</link>
+        <link>http://example.org/</link>
         <description>这是我的长期储备</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1390077306@qq.com (Billow)</managingEditor>
             <webMaster>1390077306@qq.com (Billow)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 03 Dec 2021 21:40:32 &#43;0800</lastBuildDate>
-            <atom:link href="https://hugodoit.pages.dev/index.xml" rel="self" type="application/rss+xml" />
+            <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>文件系统</title>
-    <link>https://hugodoit.pages.dev/file_system/</link>
+    <link>http://example.org/file_system/</link>
     <pubDate>Fri, 03 Dec 2021 21:40:32 &#43;0800</pubDate><author>
-                    <name>Billow</name><uri>https://hugodoit.pages.dev/authors/billow</uri></author><author>
-                    <name>Billow</name><uri>https://hugodoit.pages.dev/authors/billow</uri></author><guid>https://hugodoit.pages.dev/file_system/</guid>
+                    <name>Billow</name><uri>http://example.org/authors/billow</uri></author><author>
+                    <name>Billow</name><uri>http://example.org/authors/billow</uri></author><guid>http://example.org/file_system/</guid>
     <description><![CDATA[散列表(哈希表)能够通过给定的关键字的值直接访问到具体对应的值的一个数据结构。也就是说把关键字映射到一个表中的位置来直接访问记录，以加快访问]]></description>
 </item><item>
     <title>主题文档 - 基本概念</title>
-    <link>https://hugodoit.pages.dev/theme-documentation-basics/</link>
+    <link>http://example.org/theme-documentation-basics/</link>
     <pubDate>Tue, 03 Mar 2020 21:40:32 &#43;0800</pubDate><author>
                     <name>Dillon</name><uri>https://dillonzq.com</uri></author><author>
-                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>https://hugodoit.pages.dev/theme-documentation-basics/</guid>
+                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>http://example.org/theme-documentation-basics/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/featured-image.webp" referrerpolicy="no-referrer">
             </div><p>探索 Hugo - <strong>DoIt</strong> 主题的全部内容和背后的核心概念.</p>]]></description>
 </item><item>
     <title>主题文档 - 内容</title>
-    <link>https://hugodoit.pages.dev/theme-documentation-content/</link>
+    <link>http://example.org/theme-documentation-content/</link>
     <pubDate>Wed, 04 Mar 2020 16:30:05 &#43;0800</pubDate><author>
                     <name>Dillon</name><uri>https://dillonzq.com</uri></author><author>
-                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>https://hugodoit.pages.dev/theme-documentation-content/</guid>
+                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>http://example.org/theme-documentation-content/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/featured-image.webp" referrerpolicy="no-referrer">
             </div><p>了解如何在 <strong>DoIt</strong> 主题中快速, 直观地创建和组织内容.</p>]]></description>
 </item><item>
     <title>主题文档 - 内置 Shortcodes</title>
-    <link>https://hugodoit.pages.dev/theme-documentation-built-in-shortcodes/</link>
+    <link>http://example.org/theme-documentation-built-in-shortcodes/</link>
     <pubDate>Thu, 05 Mar 2020 16:29:59 &#43;0800</pubDate><author>
                     <name>Dillon</name><uri>https://dillonzq.com</uri></author><author>
-                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>https://hugodoit.pages.dev/theme-documentation-built-in-shortcodes/</guid>
+                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>http://example.org/theme-documentation-built-in-shortcodes/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/featured-image.webp" referrerpolicy="no-referrer">
             </div><p><strong>Hugo</strong> 提供了多个内置的 Shortcodes, 以方便作者保持 Markdown 内容的整洁.</p>]]></description>
 </item><item>
     <title>主题文档 - 扩展 Shortcodes</title>
-    <link>https://hugodoit.pages.dev/theme-documentation-extended-shortcodes/</link>
+    <link>http://example.org/theme-documentation-extended-shortcodes/</link>
     <pubDate>Fri, 06 Mar 2020 16:29:59 &#43;0800</pubDate><author>
                     <name>Dillon</name><uri>https://dillonzq.com</uri></author><author>
-                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>https://hugodoit.pages.dev/theme-documentation-extended-shortcodes/</guid>
+                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>http://example.org/theme-documentation-extended-shortcodes/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/featured-image.webp" referrerpolicy="no-referrer">
             </div><p><strong>DoIt</strong> 主题在 Hugo 内置的 shortcode 的基础上提供多个扩展的 shortcode.</p>]]></description>
 </item><item>
     <title>Markdown 基本语法</title>
-    <link>https://hugodoit.pages.dev/basic-markdown-syntax/</link>
+    <link>http://example.org/basic-markdown-syntax/</link>
     <pubDate>Sun, 01 Dec 2019 21:57:40 &#43;0800</pubDate><author>
-                    <name>Dillon</name><uri>https://dillonzq.com</uri></author><guid>https://hugodoit.pages.dev/basic-markdown-syntax/</guid>
+                    <name>Dillon</name><uri>https://dillonzq.com</uri></author><guid>http://example.org/basic-markdown-syntax/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/featured-image.webp" referrerpolicy="no-referrer">
             </div><p>这篇文章提供了可以在 Hugo 的文章中使用的基本 Markdown 语法示例.</p>]]></description>
 </item><item>
     <title>Emoji 支持</title>
-    <link>https://hugodoit.pages.dev/emoji-support/</link>
+    <link>http://example.org/emoji-support/</link>
     <pubDate>Tue, 01 Oct 2019 17:55:28 &#43;0800</pubDate><author>
-                    <name>Dillon</name><uri>https://dillonzq.com</uri></author><guid>https://hugodoit.pages.dev/emoji-support/</guid>
+                    <name>Dillon</name><uri>https://dillonzq.com</uri></author><guid>http://example.org/emoji-support/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/featured-image.webp" referrerpolicy="no-referrer">
             </div><p>Emoji 可以通过多种方式在 Hugo 项目中启用.</p>]]></description>
 </item><item>
     <title>PWA 支持</title>
-    <link>https://hugodoit.pages.dev/pwa-support/</link>
+    <link>http://example.org/pwa-support/</link>
     <pubDate>Mon, 10 May 2021 16:21:41 &#43;0100</pubDate><author>
-                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>https://hugodoit.pages.dev/pwa-support/</guid>
+                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>http://example.org/pwa-support/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/featured-image.webp" referrerpolicy="no-referrer">
             </div><p>了解如何在 DoIt 主题中配置渐进式网络应用程序 (PWA).</p>]]></description>
 </item><item>
     <title>系列分类测试</title>
-    <link>https://hugodoit.pages.dev/series-taxonomy-tests/</link>
+    <link>http://example.org/series-taxonomy-tests/</link>
     <pubDate>Sat, 03 Jul 2021 22:15:26 &#43;0800</pubDate><author>
         <name>Billow</name>
-    </author><guid>https://hugodoit.pages.dev/series-taxonomy-tests/</guid>
+    </author><guid>http://example.org/series-taxonomy-tests/</guid>
     <description><![CDATA[系列分类测试]]></description>
 </item></channel>
 </rss>

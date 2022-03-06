@@ -58,4 +58,4 @@ Disallow: /
 User-agent: *
 Allow: *
 
-Sitemap: https://hugodoit.pages.dev/en/sitemap.xml
+Sitemap: http://example.org/en/sitemap.xml

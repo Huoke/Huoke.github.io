@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>All Posts - Billow&#39;s Blog</title>
-        <link>https://hugodoit.pages.dev/en/posts/</link>
+        <link>http://example.org/en/posts/</link>
         <description>All Posts | Billow&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>1390077306@qq.com (Billow)</managingEditor>
-            <webMaster>1390077306@qq.com (Billow)</webMaster><copyright>This work is licensed under a Creative Commons AttriFution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 20 Dec 2021 17:35:33 &#43;0000</lastBuildDate><atom:link href="https://hugodoit.pages.dev/en/posts/" rel="self" type="application/rss+xml" /></channel>
+            <webMaster>1390077306@qq.com (Billow)</webMaster><copyright>This work is licensed under a Creative Commons AttriFution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 20 Dec 2021 17:35:33 &#43;0000</lastBuildDate><atom:link href="http://example.org/en/posts/" rel="self" type="application/rss+xml" /></channel>
 </rss>

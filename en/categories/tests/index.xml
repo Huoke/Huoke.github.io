@@ -1,71 +1,71 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Tests - Category - Billow&#39;s Blog</title>
-        <link>https://hugodoit.pages.dev/en/categories/tests/</link>
+        <link>http://example.org/en/categories/tests/</link>
         <description>Tests - Category - Billow&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>1390077306@qq.com (Billow)</managingEditor>
-            <webMaster>1390077306@qq.com (Billow)</webMaster><copyright>This work is licensed under a Creative Commons AttriFution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 20 Dec 2021 17:35:33 &#43;0000</lastBuildDate><atom:link href="https://hugodoit.pages.dev/en/categories/tests/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1390077306@qq.com (Billow)</webMaster><copyright>This work is licensed under a Creative Commons AttriFution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 20 Dec 2021 17:35:33 &#43;0000</lastBuildDate><atom:link href="http://example.org/en/categories/tests/" rel="self" type="application/rss+xml" /><item>
     <title>APlayer Tests</title>
-    <link>https://hugodoit.pages.dev/en/aplayer-tests/</link>
+    <link>http://example.org/en/aplayer-tests/</link>
     <pubDate>Mon, 20 Dec 2021 17:35:33 &#43;0000</pubDate><author>
         <name>Billow</name>
-    </author><guid>https://hugodoit.pages.dev/en/aplayer-tests/</guid>
+    </author><guid>http://example.org/en/aplayer-tests/</guid>
     <description><![CDATA[Author Fallback Tests]]></description>
 </item><item>
     <title>TOC Tests</title>
-    <link>https://hugodoit.pages.dev/en/toc-tests/</link>
+    <link>http://example.org/en/toc-tests/</link>
     <pubDate>Mon, 27 Sep 2021 09:47:46 &#43;0100</pubDate><author>
-                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>https://hugodoit.pages.dev/en/toc-tests/</guid>
+                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>http://example.org/en/toc-tests/</guid>
     <description><![CDATA[TOC Tests]]></description>
 </item><item>
     <title>Series Taxonomy Tests</title>
-    <link>https://hugodoit.pages.dev/en/series-taxonomy-tests/</link>
+    <link>http://example.org/en/series-taxonomy-tests/</link>
     <pubDate>Sat, 03 Jul 2021 22:15:26 &#43;0800</pubDate><author>
         <name>Billow</name>
-    </author><guid>https://hugodoit.pages.dev/en/series-taxonomy-tests/</guid>
+    </author><guid>http://example.org/en/series-taxonomy-tests/</guid>
     <description><![CDATA[Series Taxonomy Tests]]></description>
 </item><item>
     <title>Single Author Tests</title>
-    <link>https://hugodoit.pages.dev/en/author-single-tests/</link>
+    <link>http://example.org/en/author-single-tests/</link>
     <pubDate>Mon, 07 Jun 2021 20:40:23 &#43;0100</pubDate><author>
-                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>https://hugodoit.pages.dev/en/author-single-tests/</guid>
+                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>http://example.org/en/author-single-tests/</guid>
     <description><![CDATA[Single Author Tests]]></description>
 </item><item>
     <title>Author Fallback Tests</title>
-    <link>https://hugodoit.pages.dev/en/author-fallback-tests/</link>
+    <link>http://example.org/en/author-fallback-tests/</link>
     <pubDate>Mon, 07 Jun 2021 20:35:12 &#43;0100</pubDate><author>
         <name>Billow</name>
-    </author><guid>https://hugodoit.pages.dev/en/author-fallback-tests/</guid>
+    </author><guid>http://example.org/en/author-fallback-tests/</guid>
     <description><![CDATA[Author Fallback Tests]]></description>
 </item><item>
     <title>Showcase Tests</title>
-    <link>https://hugodoit.pages.dev/en/showcase-tests/</link>
+    <link>http://example.org/en/showcase-tests/</link>
     <pubDate>Wed, 26 May 2021 15:30:49 &#43;0100</pubDate><author>
-                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>https://hugodoit.pages.dev/en/showcase-tests/</guid>
+                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>http://example.org/en/showcase-tests/</guid>
     <description><![CDATA[Showcase shortcode tests]]></description>
 </item><item>
     <title>Friend Shortcode Tests</title>
-    <link>https://hugodoit.pages.dev/en/friend-link-tests/</link>
+    <link>http://example.org/en/friend-link-tests/</link>
     <pubDate>Thu, 29 Apr 2021 13:41:31 &#43;0100</pubDate><author>
-                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>https://hugodoit.pages.dev/en/friend-link-tests/</guid>
+                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>http://example.org/en/friend-link-tests/</guid>
     <description><![CDATA[Friend Shortcode Tests]]></description>
 </item><item>
     <title>KaTeX Tests</title>
-    <link>https://hugodoit.pages.dev/en/katex-tests/</link>
+    <link>http://example.org/en/katex-tests/</link>
     <pubDate>Fri, 16 Apr 2021 14:53:03 &#43;0100</pubDate><author>
-                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>https://hugodoit.pages.dev/en/katex-tests/</guid>
+                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>http://example.org/en/katex-tests/</guid>
     <description><![CDATA[KaTeX Tests]]></description>
 </item><item>
     <title>Music Tests</title>
-    <link>https://hugodoit.pages.dev/en/music-tests/</link>
+    <link>http://example.org/en/music-tests/</link>
     <pubDate>Fri, 16 Apr 2021 14:47:54 &#43;0100</pubDate><author>
-                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>https://hugodoit.pages.dev/en/music-tests/</guid>
+                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>http://example.org/en/music-tests/</guid>
     <description><![CDATA[Music Tests]]></description>
 </item><item>
     <title>Mapbox Tests</title>
-    <link>https://hugodoit.pages.dev/en/mapbox-tests/</link>
+    <link>http://example.org/en/mapbox-tests/</link>
     <pubDate>Fri, 16 Apr 2021 14:45:40 &#43;0100</pubDate><author>
-                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>https://hugodoit.pages.dev/en/mapbox-tests/</guid>
+                    <name>PCloud</name><uri>https://github.com/HEIGE-PCloud</uri><email>heige.pcloud@outlook.com</email></author><guid>http://example.org/en/mapbox-tests/</guid>
     <description><![CDATA[Mapbox Tests]]></description>
 </item></channel>
 </rss>
