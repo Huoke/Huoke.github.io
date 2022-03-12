@@ -1,0 +1,23 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Windows - 分类 - Billow</title>
+        <link>http://example.org/categories/windows/</link>
+        <description>Windows - 分类 - Billow</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1390077306@qq.com (Billow)</managingEditor>
+            <webMaster>1390077306@qq.com (Billow)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 10 Mar 2022 21:40:32 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/windows/" rel="self" type="application/rss+xml" /><item>
+    <title>Windows系统及编程 - 调用脚本的几种方式</title>
+    <link>http://example.org/windows-c-%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</link>
+    <pubDate>Thu, 10 Mar 2022 21:40:32 &#43;0800</pubDate><author>
+        <name>Billow</name>
+    </author><guid>http://example.org/windows-c-%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</guid>
+    <description><![CDATA[Windows C++ 执行脚本的几种方法总结 一、WinExec微软的官方给出的建议是： 注意这个函数只是为了兼容16位Windows系统而提供的，开发中应用程序还是应该使用CreateProcess函数。
+但是我只是想运行一个vbe、bat脚本，来看看使用WinExec是否可行&hellip;
+语法
+1 2 3 4  UINT WinExec( [in] LPCSTR lpCmdLine, [in] UINT uCmdShow );   参数
+  lpCmdLine： 这是一个入参，它是要执行的应用程序的命令行，类似于&quot;D:\notepad++.exe -help&quot; 之类，是可以加应用自己的参数的。如果lpCmdLine中没有包含路径，系统将按照下面的顺序来查找这个可执行文件：
+ 主调进程.exe文件所在的目录。 主调进程的当期目录 Windows 系统目录，即GetSystemDirectory返回的System32子文件夹。 Windows目录，即GetWindowsDirectory返回的目录 PATH环境变量中列出的目录    uCmdShow： 也是一个入参，这是一个显示选项，详细的显示设置查看ShowWindows函数
+  返回值
+函数成功，返回值是一个大于31的数。如果失败，返回值是下面的参数：
+   返回错误码 错误码描述     0 系统资源不够或者内存不够   ERROR_BAD_FORMAT .exe文件是非法的   ERROR_FILE_NOT_FOUND 指定的文件没有找到   ERROR_PATH_NOT_FOUND 指定的路径没有找到    提示提示 当启动的进程调用调用GetMessage函数或者达到超时时，WinExec函数返回。为了避免等待超时延时，请在调用WinExec启动的任何进程中尽快调用GetMessage函数。:( 安全方面评论]]></description>
+</item></channel>
+</rss>
